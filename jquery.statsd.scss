@@ -1,0 +1,31 @@
+#timing-report {
+	position: fixed;
+	top: 0;
+	left: 0;
+	border: 2px solid #c00;
+	background-color: #fcc;
+	z-index: 1001;
+	padding: 5px;
+	hr {
+		margin: 0;
+		line-height: 1px;
+		color: #000;
+		background-color: #000;
+		border-color: #000;
+	}
+	table {
+		background-color: #fcc;
+		margin-bottom: 0;
+		width: 100%;
+		td, th {
+			padding: 2px 4px;
+			font-size: 14px;
+		}
+	}
+	thead {
+		background-color: #fff;
+	}
+	table tbody tr:nth-child(even) {
+		background-color: #fbb;
+	}
+}
