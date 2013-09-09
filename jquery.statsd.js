@@ -16,6 +16,7 @@
 	}
 }(function ($) {
 	if (!window.performance) {
+		$.statsd = function () {};
 		return null;
 	}
 
