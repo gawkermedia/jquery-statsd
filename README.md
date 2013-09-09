@@ -6,7 +6,7 @@ This plugin can measure and report times spent on arbitrary items in your front-
 
 Installation
 ------------
-You just need to add the file *jquery.statsd.js* to your JS stack and include contents of *jquery.statsd.css* in your stylesheet.
+You just need to add the file *jquery.statsd.js* to your JS stack and include contents of *jquery.statsd.scss* in your stylesheet.
 
 Usage
 -----
