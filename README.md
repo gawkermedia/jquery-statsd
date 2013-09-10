@@ -31,7 +31,8 @@ $.statsd({
     ],
     appendParams: function (params) {
         return params;
-    })
+    }),
+    reportingPercent: 25
 });
 ```
 #### Options:
@@ -39,6 +40,7 @@ $.statsd({
 - statsdUrl: your API endpoint path for reporting times to statsd.
 - reportEvents: data about these Navigation Timing events will be included in the query sent to statsd.
 - appendParams: a wrapper method for appending arbitrary values you need in your own environment to the query string of the statsd API call.
+- reportingPercent: this percentage of page loads will be reported to statsd. It's purpose is to reduce stress on your statsd API endpoint.
 
 ### Measurement
 ```

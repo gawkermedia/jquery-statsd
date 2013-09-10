@@ -52,7 +52,8 @@
 			],
 			appendParams: function (params) {
 				return params;
-			}
+			},
+			reportingPercent: 10
 		}, options);
 
 		var timing = window.performance.timing,
@@ -177,7 +178,9 @@
 				}
 
 				if (settings.statsdUrl !== undefined) {
-					reportTicks();
+					if (Math.floor(Math.random() * 100) < settings.reportingPercent) {
+						reportTicks();
+					}
 				}
 			}, 0);
 		});
