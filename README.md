@@ -32,7 +32,8 @@ $.statsd({
     appendParams: function (params) {
         return params;
     }),
-    reportingPercent: 25
+    reportingPercent: 25,
+    baseOfOperations: 'Response end'
 });
 ```
 #### Options:
@@ -41,6 +42,7 @@ $.statsd({
 - reportEvents: data about these Navigation Timing events will be included in the query sent to statsd.
 - appendParams: a wrapper method for appending arbitrary values you need in your own environment to the query string of the statsd API call.
 - reportingPercent: this percentage of page loads will be reported to statsd. It's purpose is to reduce stress on your statsd API endpoint.
+- baseOfOperations: it is a string, 'message' of a tick recorded during your frontend code running. This tick will be used as a base of relative time operations. Let's say you set it to 'Response end', time elapsed for an event will be calculated relative to that point.
 
 ### Measurement
 ```

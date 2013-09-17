@@ -53,7 +53,8 @@
 			appendParams: function (params) {
 				return params;
 			},
-			reportingPercent: 10
+			reportingPercent: 100,
+			baseOfOperations: 'Response end'
 		}, options);
 
 		var timing = window.performance.timing,
@@ -61,6 +62,22 @@
 			ticks = window.statsdTicks,
 
 			reportRendered = false,
+
+			baseOfOperationsMs = 0,
+
+			/**
+			 * Returns a simple time difference.
+			 * @param  {int} ms Timestamp of the actual event.
+			 * @param  {int} relativeTo Optional parameter, earlier timestamp.
+			 * @return {int} Difference.
+			 */
+			elapsedTime = function (ms, relativeTo) {
+				if (relativeTo === undefined) {
+					relativeTo = baseOfOperationsMs;
+				}
+
+				return ms - relativeTo;
+			},
 
 			/**
 			 * Will render a single line of timing report on your page.
@@ -70,7 +87,7 @@
 				var reporting = (tick.reporting === true) ? 'X' : '';
 
 				$('.advanced-timing-table').append(
-					'<tr><td class="text-right">' + (tick.ms - timing.navigationStart) + ' ms</td><td class="text-right">' + (tick.ms - timing.responseEnd) + ' ms</td><td>' + tick.message + '</td><td>' + reporting + '</td></tr>'
+					'<tr><td class="text-right">' + elapsedTime(tick.ms, timing.navigationStart) + ' ms</td><td class="text-right">' + elapsedTime(tick.ms) + ' ms</td><td>' + tick.message + '</td><td>' + reporting + '</td></tr>'
 				);
 			},
 
@@ -116,7 +133,7 @@
 					retval = [];
 
 				for (i = 0; i < l; i++) {
-					retval.push(ticks[i].message.toLowerCase().replace(/\s/g, '_') + '=' + (ticks[i].ms - timing.responseEnd));
+					retval.push(ticks[i].message.toLowerCase().replace(/\s/g, '_') + '=' + elapsedTime(ticks[i].ms));
 				}
 
 				return retval;
@@ -171,6 +188,20 @@
 
 					return retval;
 				});
+
+				(function () {
+					// setting base of operations
+					var i = 0,
+						l = ticks.length;
+
+					while (i < l && baseOfOperationsMs === 0) {
+						if (ticks[i].message === settings.baseOfOperations) {
+							baseOfOperationsMs = ticks[i].ms;
+						}
+
+						i++;
+					}
+				}());
 
 				if (settings.displayReport === true) {
 					renderReport();
