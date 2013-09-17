@@ -126,8 +126,7 @@
 			 * Sends timing data to your statsd API endpoint.
 			 */
 			reportTicks = function () {
-				var navStartToLoadEnd = timing.loadEventEnd - timing.navigationStart,
-					ticksToReport = (function () {
+				var ticksToReport = (function () {
 						// only the ones with reporting=true
 						var filteredTicks = [],
 							i,
