@@ -4,17 +4,11 @@
  * @author Jozsef Kozma
  */
 
-'use strict';
-
 /*global define, window, jQuery */
 
-(function (factory) {
-	if (typeof define === 'function' && define.amd) {
-		define(['lib/jquery'], factory);
-	} else {
-		factory(jQuery);
-	}
-}(function ($) {
+(function ($) {
+	'use strict';
+
 	if (!window.performance) {
 		$.statsd = function () {};
 		return null;
@@ -225,4 +219,4 @@
 		};
 
 	};
-}));
+}(jQuery));
